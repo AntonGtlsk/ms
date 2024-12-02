@@ -1,0 +1,20 @@
+env: "local" #local, dev
+wss_server:
+  address: ":8082"
+sql_connection:
+  username: "name"
+  password: "password"
+  host: "mysql"
+  port: "3306"
+  dbName: "chat"
+
+bot_token: ""
+
+logger:
+  folder: "all_chains"
+  filenames:
+    - debug.log: [ fatal, warn, error ]
+    - stdout: [ all ]
+    - info.log: [ all ]
+  webhooks:
+    - https://discord.com/api/webhooks/1283497932125114418/DERqavx6s2QyE6OvNUB_AkVnTCJCdkgMLtryZvKG5l8dije_rShZmjfP7SB_HW4P_Z8r: [ all ]

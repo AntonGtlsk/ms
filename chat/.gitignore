@@ -1,0 +1,3 @@
+**/*.log
+**/.idea/
+cluster-1.yaml

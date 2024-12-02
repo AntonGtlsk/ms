@@ -1,0 +1,1 @@
+[32m time=2 Dec 2024 11:38:04; [fatal] message=[Error opening discord connection]; fields={'error: websocket: close 4004: Authentication failed.', }; file=[ /home/anton/goProjects/ms/auth/cmd/main.go:49 ]; [0m 

@@ -1,0 +1,24 @@
+env: "local" #local, dev
+http_server:
+  address: ":8081"
+  timeout: 4s
+  idle_timeout: 60s
+sql_connection: 
+  username: "name"
+  password: "password"
+  host: "mysql"
+  port: "3306"
+  dbName: "auth"
+
+bot_token: ""
+
+logger:
+  folder: "logs"
+  # AllLevels - all
+  # io.Stdout - stdout
+  filenames:
+    - debug.log: [ fatal, warn, error ]
+    - stdout: [ all ]
+    - info.log: [ all ]
+  webhooks:
+    - https://discord.com/api/webhooks/1283497537231388744/1jOjH3wB7wDuecHkjMfxBOdlQNgTTKj9jYGfRt29eSKA6o6aY0v7n8FQkzYGgHnwpRcZ: [ all ]

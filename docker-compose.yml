@@ -1,0 +1,57 @@
+version: '3.8'
+networks:
+  test-backend:
+    driver: bridge
+services:
+  mysql:
+    networks:
+      - test-backend
+    platform: linux/amd64
+    image: mysql:8.0
+    ports:
+      - "3305:3306"
+    environment:
+      MYSQL_USER: name
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./mysql-data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55
+
+  auth:
+    restart: on-failure
+    networks:
+      - test-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    build:
+      context: ./
+      dockerfile: ./auth/Dockerfile
+    command: ./main --port 8081
+    volumes:
+      - ./auth:/app/auth
+    ports:
+      - "8081"
+
+  chat:
+    restart: on-failure
+    networks:
+      - test-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    build:
+      context: ./
+      dockerfile: ./chat/Dockerfile
+    command: ./main
+    volumes:
+      - ./chat:/app/chat
+    ports:
+      - 8082:8082
